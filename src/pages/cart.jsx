@@ -67,6 +67,12 @@ export const Cart = () => {
       imageUrl: id,
       goods: [...cart]
     });
+    setUser({
+      phone: '',
+      name: ''
+    })
+    setFile(null)
+    
   }
 
   return (
