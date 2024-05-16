@@ -11,8 +11,12 @@ export const Footer = () => {
             Контактные связи
           </p>
           <div className='flex gap-2 items-center mt-4'>
-            <FaWhatsapp size={40} color='green'/>
-            <FaInstagramSquare size={40} color='red'/>
+            <a href="https://wa.me/77076599069" target='_blank'>
+              <FaWhatsapp size={40} color='green'/>
+            </a>
+            <a href="https://www.instagram.com/bereke_almaty_vypechka?igsh=anpmenBpNm16YjVv" target='_blank'>
+              <FaInstagramSquare size={40} color='red'/>
+            </a>
             <span className='font-bold'>+7 707 659 9069</span>
           </div>
         </div>

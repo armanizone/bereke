@@ -72,7 +72,6 @@ export const Cart = () => {
       name: ''
     })
     setFile(null)
-    
   }
 
   return (

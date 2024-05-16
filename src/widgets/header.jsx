@@ -15,9 +15,11 @@ export const Header = () => {
           <Link to={'/'}>
             <FaHome size={70}/>
           </Link>
-          <span className='text-7xl font-mono'>
-            BEREKE
-          </span>
+          <Link to={'/'}>
+            <span className='text-7xl font-mono'>
+              BEREKE
+            </span>
+          </Link>
           <Link to={'/cart'}>
             <CiShoppingBasket size={70}/>
           </Link>
