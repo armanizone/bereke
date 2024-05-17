@@ -3,7 +3,7 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 
 const options = [
   {label: 'Мучные изделия', val: 'flour'},
-  {label: 'Доманые торты', val: 'cake'},
+  {label: 'Домашные торты', val: 'cake'},
   {label: 'Молочные продукты', val: 'milk'},
   {label: 'Выгодные сеты', val: 'set'},
 ]

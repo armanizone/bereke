@@ -1,6 +1,6 @@
+import React from 'react'
 import { storage } from 'firebase';
 import { getDownloadURL, ref } from 'firebase/storage';
-import React from 'react'
 import { CiShoppingBasket } from 'react-icons/ci'
 
 export const Card = ({value}) => {
