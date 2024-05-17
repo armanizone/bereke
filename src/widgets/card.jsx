@@ -37,8 +37,8 @@ export const Card = ({value}) => {
   }, [])
 
   return (
-    <div className='max-w-64 space-y-4'>
-      <img src={image} alt="" className='w-full max-h-[170px] object-contain ' />
+    <div className='max-w-64 space-y-4 mx-auto'>
+      <img src={image} alt="" className='w-full max-h-[170px] object-contain' />
       <p className='text-xl font-bold text-center'>{value.title}</p>
       <p className='text-xl font-bold text-center'>{value.price} ₸</p>
       <button className='flex space-x-3 p-2 bg-pink-200 mx-auto' onClick={addItemToLocalStorage}>
