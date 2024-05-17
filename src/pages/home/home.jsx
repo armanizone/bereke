@@ -19,8 +19,6 @@ export const Home = () => {
     const querySnapshot = await getDocs(q);
     const items = []
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
       items.push({id: doc.id, ...doc.data()})
     });
     setFood(items)
@@ -41,7 +39,7 @@ export const Home = () => {
               {type === `cake` && 'Домашние торты'}
               {type === `set` && 'Выгодые сеты'}
             </h2>
-            <div className='grid grid-cols-4 gap-4'>
+            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
               {food.map(q => {
                 return (
                   <Card key={q.id} value={q}/>

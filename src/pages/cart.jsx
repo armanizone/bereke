@@ -1,20 +1,84 @@
 import React from 'react'
 import { Button, Input } from '@chakra-ui/react'
 import { MdDeleteForever } from "react-icons/md";
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { db } from 'firebase';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { db, storage } from 'firebase';
 import { doc, setDoc } from 'firebase/firestore';
+
+export const CartElement = ({q, decreaseQuantity, increaseQuantity, removeItemFromCart, cart}) => {
+  
+  const [image, setImage] = React.useState(null)
+
+  async function getImage () {
+    getDownloadURL(ref(storage, q.imageUrl))
+    .then(url => {
+      setImage(url)
+    })
+  }
+
+  React.useEffect(() => {
+    getImage()
+  }, [])
+
+  return (
+    <div className='flex flex-col lg:flex-row items-center'>
+      <img src={image} alt="" className='max-w-64 max-h-[100px]' />
+      <p className='lg:ml-12 text-green-700 text-3xl font-bold'>{q.title}</p>
+      <div className='grid lg:grid-cols-[45%_45%_auto] lg:ml-auto lg:w-[400px] gap-4 mt-3 lg:mt-0'>
+        <div className='flex justify-between border border-green-700 py-2 px-4 space-x-4 rounded-full text-xl text-green-700 font-bold min-w-14 max-w-32'>
+          <button onClick={() => decreaseQuantity(q.id)}>-</button>
+          <span>{q.quantity}</span>
+          <button onClick={() => increaseQuantity(q.id)}>+</button>
+        </div>
+        <p className='text-green-700 text-3xl font-bold'>{q.price * q.quantity} ₸</p>
+        <MdDeleteForever size={40} onClick={() => removeItemFromCart(q.id)} color='green' className='mx-auto'/>
+      </div>
+    </div>
+  )
+}
 
 export const Cart = () => {
 
   const [cart, setCart] = React.useState([]);
 
-  const id = React.useId()
-
   React.useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCart(storedCart);
   }, []);
+
+  const [file, setFile] = React.useState(null)
+
+  const [user, setUser] = React.useState({
+    phone: '',
+    name: ''
+  })
+
+  function handleFile (e) {
+    setFile(e.currentTarget.files[0])
+  }
+
+  async function createBid () {
+    const id = crypto.randomUUID()
+    const storage = getStorage();
+    const storageRef = ref(storage, id);
+  
+    await uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded');
+    });
+
+    await setDoc(doc(db, "bids", id), {
+      ...user,
+      imageUrl: id,
+      goods: [...cart]
+    });
+    setUser({
+      phone: '',
+      name: ''
+    })
+    setFile(null)
+    localStorage.removeItem('cart');
+    setCart([]);
+  }
 
   const updateCart = (updatedCart) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -42,38 +106,6 @@ export const Cart = () => {
     updateCart(updatedCart);
   };
 
-  const [file, setFile] = React.useState(null)
-
-  const [user, setUser] = React.useState({
-    phone: '',
-    name: ''
-  })
-
-  function handleFile (e) {
-    setFile(e.currentTarget.files[0])
-  }
-
-  async function createBid () {
-    const id = crypto.randomUUID()
-    const storage = getStorage();
-    const storageRef = ref(storage, id);
-  
-    await uploadBytes(storageRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-    });
-
-    await setDoc(doc(db, "bids", id), {
-      ...user,
-      imageUrl: id,
-      goods: [...cart]
-    });
-    setUser({
-      phone: '',
-      name: ''
-    })
-    setFile(null)
-  }
-
   return (
     <div className='w-full mt-8'>
       <div className="container">
@@ -93,22 +125,15 @@ export const Cart = () => {
             ПОДТВЕРДИТЬ ИНФОРМАЦИЮ
           </Button>
           <div className='mt-10 space-y-6'>
-            {cart.map(q => {
-              return (
-                <div key={q.id} className='flex '>
-                  <img src="" alt="" />
-                  <p className='ml-12 text-green-700 text-3xl font-bold'>{q.title}</p>
-                  <div className='grid grid-cols-[45%_45%_auto] ml-auto w-[400px]'>
-                    <div className='flex justify-between border border-green-700 py-2 px-4 space-x-4 rounded-full text-xl text-green-700 font-bold min-w-14 max-w-32'>
-                      <button onClick={() => decreaseQuantity(q.id)}>-</button>
-                      <span>{q.quantity}</span>
-                      <button onClick={() => increaseQuantity(q.id)}>+</button>
-                    </div>
-                    <p className='text-green-700 text-3xl font-bold'>{q.price * q.quantity} ₸</p>
-                    <MdDeleteForever size={40} onClick={() => removeItemFromCart(q.id)} color='green'/>
-                  </div>
-                </div>
-              )
+            {cart?.map(q => {
+              return <CartElement 
+                key={q.id} 
+                q={q}
+                removeItemFromCart={removeItemFromCart}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
+                cart={cart}
+              />
             })}
           </div>
           <div className='mt-5'>

@@ -13,15 +13,15 @@ export const Header = () => {
       <div className="container">
         <div className='w-full flex justify-between'>
           <Link to={'/'}>
-            <FaHome size={70}/>
+            <FaHome className='text-4xl lg:text-7xl' />
           </Link>
           <Link to={'/'}>
-            <span className='text-7xl font-mono'>
+            <span className='text-4xl lg:text-7xl font-mono'>
               BEREKE
             </span>
           </Link>
           <Link to={'/cart'}>
-            <CiShoppingBasket size={70}/>
+            <CiShoppingBasket className='text-4xl lg:text-7xl'/>
           </Link>
         </div>
       </div>
@@ -33,13 +33,13 @@ export const Header = () => {
       <div className="container">
         <div className='w-full flex justify-between'>
           <Link to={'/'}>
-            <FaHome size={70}/>
+            <FaHome className='text-4xl lg:text-7xl'/>
           </Link>
-          <span className='text-7xl font-mono'>
+          <span className='text-4xl lg:text-7xl font-mono'>
             BEREKE
           </span>
           <Link to={'/cart'}>
-            <CiShoppingBasket size={70}/>
+            <CiShoppingBasket className='text-4xl lg:text-7xl'/>
           </Link>
         </div>
       </div>

@@ -25,7 +25,7 @@ export const Sidebar = () => {
   return (
     <div className='w-ful bg-pink-200 py-4'>
       <div className="container">
-        <div className="w-full flex justify-around gap-4">
+        <div className="w-full flex flex-wrap justify-around gap-4">
           {options.map(q => {
             return (
               <button key={q.val} onClick={() => handleClick(q.val)}>
