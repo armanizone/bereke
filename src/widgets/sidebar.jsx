@@ -5,7 +5,7 @@ const options = [
   {label: 'Мучные изделия', val: 'flour'},
   {label: 'Домашные торты', val: 'cake'},
   {label: 'Молочные продукты', val: 'milk'},
-  {label: 'Выгодные сеты', val: 'set'},
+  // {label: 'Выгодные сеты', val: 'set'},
 ]
 
 export const Sidebar = () => {
