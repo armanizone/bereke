@@ -53,12 +53,15 @@ export const Home = () => {
   }
 
   return (
-    <div className='w-full'>
-      <div className="container w-full h-full">
-        <div className='w-full h-full flex items-center justify-center'>
-          <Hero/>
+    <>
+      <div className='w-full'>
+        <div className="container w-full h-full">
+          <div className='w-full h-full flex items-center justify-center'>
+            <Hero/>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
+
