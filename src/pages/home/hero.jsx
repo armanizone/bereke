@@ -14,7 +14,7 @@ export const Hero = () => {
           тесто из ручных яиц. Обязательно обращайтесть к нам и у вас появится возможность воспользоваться нашей продукцией
         </p>
       </div>
-      <img src={flour} className='w-full'/>
+      <img src={flour} className='w-full mix-blend-multiply hover:animate-spin' />
     </div>
   )
 }
