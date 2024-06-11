@@ -7,7 +7,7 @@ import { Anime } from './anime'
 
 export const Layout = () => {
   return (
-    <div className='w-full min-h-screen relative p-4 md:p-20 bg-gradient-to-r from-emerald-400 to-pink-400'>
+    <div className='w-full min-h-screen relative p-4 md:p-20'>
       {/* <div className='fixed w-full h-full hidden sm:block -z-10'>
         <marquee
           direction="down"
