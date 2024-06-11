@@ -3,7 +3,7 @@ import flour from 'assets/hero-flour.png'
 
 export const Hero = () => {
   return (
-    <div className="w-full grid lg:grid-cols-[50%_auto] my-4 px-4">
+    <div className="w-full grid lg:grid-cols-[50%_auto] mt-8 md:mt-14 px-4">
       <div className='max-w-3xl'>
         <h1 className='text-3xl font-semibold border-black border-b-2 text-center pb-1'>
           Bereke almaty vypechka
